@@ -1,0 +1,14 @@
+<div class="container">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="flex-outer">
+      <label for="username">Your Name</label>
+      <input class="form-control" name="username" id="username" type="text" formControlName="username">
+      <p class="text-class"  [@fadeToggle]=currentState >Please enter you name and press enter</p>
+    </div>
+    <div class="flex-outer">
+      <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

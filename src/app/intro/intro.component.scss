@@ -1,0 +1,88 @@
+$color-red : rgb(14, 238, 107);
+
+.text-class {
+    color: $color-red;
+}
+
+body {
+  font: normal 18px/1.5 "Fira Sans", "Helvetica Neue", sans-serif;
+  background: #3AAFAB;
+  color: #fff;
+  padding: 50px 0;
+}
+
+.container {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: beige;
+}
+
+.container * {
+  box-sizing: border-box;
+}
+
+.flex-outer,
+.flex-inner {
+  list-style-type: none;
+  padding: 0;
+  
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.flex-outer {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.flex-inner {
+  padding: 0 8px;
+  justify-content: space-between;  
+}
+
+.flex-outer label,
+.flex-outer p {
+  padding: 8px;
+  font-weight: 300;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.flex-outer > label,
+.flex-outer p {
+  flex: 1 0 120px;
+  max-width: 300px;
+}
+
+.flex-outer > label + *,
+.flex-inner {
+  flex: 1 0 220px;
+}
+
+.flex-outer p {
+  margin: 0;
+  font-size: 12px;
+}
+
+.flex-outer input:not([type='checkbox']),
+.flex-outer textarea {
+  padding: 15px;
+  border: none;
+}
+
+.flex-outer button {
+  margin-left: auto;
+  padding: 8px 16px;
+  border: none;
+  background: #333;
+  color: #f2f2f2;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  border-radius: 2px;
+}
+
+.flex-inner {
+  width: 100px;
+}
