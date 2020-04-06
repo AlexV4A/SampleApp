@@ -13,7 +13,7 @@ export class AppmessageService {
    * @private
    * @memberof AppdataService
    */
-  private messageEvent = new BehaviorSubject<ActionObject>({id : '', message: ''});
+  private _messageEvent = new BehaviorSubject<ActionObject>({id : '', message: ''});
 
 
   constructor() { }
@@ -28,7 +28,7 @@ export class AppmessageService {
    * @memberof AppdataService
    */
   public setMessageEvent(actionObj: ActionObject) {
-    this.messageEvent.next(Object.assign({}, actionObj));
+    this._messageEvent.next(Object.assign({}, actionObj));
   }
 
   /**
@@ -40,6 +40,6 @@ export class AppmessageService {
    * @memberof AppdataService
    */
   public getMessageEvent() : Observable<ActionObject> {
-    return this.messageEvent.asObservable();
+    return this._messageEvent.asObservable();
   }
 }

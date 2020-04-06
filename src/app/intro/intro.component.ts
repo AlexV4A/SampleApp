@@ -52,7 +52,7 @@ export class IntroComponent implements OnInit {
    */
   private _formSubscription: any;
 
-  constructor(private router: Router, private _formBuilder: FormBuilder,
+  constructor(private _router: Router, private _formBuilder: FormBuilder,
     private _userDataService: AppdataService) { }
 
   /**
@@ -99,7 +99,7 @@ export class IntroComponent implements OnInit {
     if (this.userForm.valid) {
       console.log('form submitted', this.userForm.get('username').value);
       this._userDataService.setUserDataObject({ id: 'RANDOMTEXT', name: this.userForm.get('username').value })
-      this.router.navigate(['/workboard']);
+      this._router.navigate(['/workboard']);
     } else {
       this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
     }
