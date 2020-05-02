@@ -111,6 +111,7 @@ export class IntroComponent implements OnInit {
    *
    * @memberof IntroComponent
    */
+  /* istanbul ignore next */
   ngOnDestroy() {
     this._formSubscription.unsubscribe();
   }

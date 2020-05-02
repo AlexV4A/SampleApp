@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ActionComponent } from './action.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler';
 
 describe('ActionComponent', () => {
   let component: ActionComponent;
@@ -8,7 +10,11 @@ describe('ActionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActionComponent ]
+      imports: [
+        BrowserAnimationsModule //For Issue Found the synthetic property @crossfade
+      ],
+      declarations: [ ActionComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

@@ -59,6 +59,16 @@ export class WorkboardComponent implements OnInit {
    */
   private _compActive : boolean = false;
 
+
+  /**
+   *_rssData - reference to rss data
+   *
+   * @private
+   * @type {any}
+   * @memberof WorkboardComponent
+   */
+  private _rssData : any;
+
   constructor(private _userDataService: AppdataService) { }
 
   /**
@@ -93,6 +103,9 @@ export class WorkboardComponent implements OnInit {
       return this._compActive
     })).subscribe( rss => {
       console.log('RSS FOUND ', rss)
+      this._rssData = rss;
+    }, error=> {
+      this._rssData = undefined;
     }
 
     )
