@@ -2,10 +2,10 @@
 
 <app-action data="{{data}}" (callSayToParent)="callParentHandler($event)"></app-action>
 <div class="parent-container">
-    <p>Hello {{userName}}</p>
+    <p class="username-text">Hello {{userName}}</p>
     <p>Parent Container</p>
     <p [@crossfade]=dataState>{{parentText}}</p>
-    <button (click)="sayChildHandler($event)">SAY HAI TO CHILD</button>
+    <button id="callChild" (click)="sayChildHandler($event)">SAY HAI TO CHILD</button>
     <button (click)="fetchRSS($event)">FETCH RSS</button>
 </div>
 <app-action data="{{data}}" (callSayToParent)="callParentHandler($event)"></app-action>

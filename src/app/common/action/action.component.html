@@ -1,6 +1,6 @@
 <div class="child-container">
         <p>Child Container</p>
-        <p [@crossfade]=dataState>{{data}}</p>
+        <p class="action-data" [@crossfade]=dataState>{{data}}</p>
         <button (click)="sayChildHandler($event)">SAY HAI TO SIBLING</button>
         <button (click)="sayParentHandler($event)">SAY HAI TO PARENT</button>
 </div>
