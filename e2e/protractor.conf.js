@@ -23,6 +23,11 @@ exports.config = {
     defaultTimeoutInterval: 30000,
     print: function() {}
   },
+  plugins: [
+    {
+      path: './protractor-e2e-coverage-custom.js'
+    }
+  ],
   onPrepare() {
     require('ts-node').register({
       project: require('path').join(__dirname, './tsconfig.json')

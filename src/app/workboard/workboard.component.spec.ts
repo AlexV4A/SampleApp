@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core
 import { WorkboardComponent } from './workboard.component';
 import { AppdataService } from '../shared/service/appdata.service';
 import { UserdataObject, RSSObject } from '../shared/model/userdata';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -71,6 +71,15 @@ describe('WorkboardComponent', () => {
   it("should test fetchRSS", () => {
     component.fetchRSS('HI')
     expect( component['_rssData']).toBeDefined();
+  });
+
+
+  it("should test fetchRSS", () => {
+    component['_userDataService'] = jasmine.createSpyObj('_userDataService', ['fetchRSS'])
+    component['_userDataService'].fetchRSS = jasmine.createSpy('fetchRSS').and.returnValue(throwError(Error))
+    // spyOn(component['_userDataService'], 'fetchRSS').and.returnValue(throwError(Error))
+    component.fetchRSS('HI')
+    expect( component['_rssData']).toBeUndefined();
   });
 
 });
