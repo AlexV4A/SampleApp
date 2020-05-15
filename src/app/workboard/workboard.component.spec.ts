@@ -8,7 +8,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Router } from '@angular/router';
 
+export class MockRouter { 
+  public navigate(): void {
+    
+  }
+};
 export class MockAppDataService {
 
   private _userInfo : UserdataObject = {
@@ -29,6 +35,13 @@ export class MockAppDataService {
       observer.next({'result': ''})
     })
   }
+
+  public logoutRequest(): Observable<RSSObject> {
+
+    return Observable.create(observer => {
+      observer.next({'result': ''})
+    })
+  }
 }
 describe('WorkboardComponent', () => {
   let component: WorkboardComponent;
@@ -42,7 +55,8 @@ describe('WorkboardComponent', () => {
           BrowserAnimationsModule //Error: Found the synthetic property @
       ],
       declarations: [ WorkboardComponent ],
-      providers:[{provide: AppdataService, useClass : MockAppDataService}],
+      providers:[{provide: AppdataService, useClass : MockAppDataService},
+         { provide: Router, useValue: MockRouter },],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
@@ -81,5 +95,19 @@ describe('WorkboardComponent', () => {
     component.fetchRSS('HI')
     expect( component['_rssData']).toBeUndefined();
   });
+
+  it("should test Logout", () => {
+    component['_router'] = jasmine.createSpyObj('_router',['navgate'])
+    component['_router'].navigate = jasmine.createSpy('navigate').and.returnValue(true);
+    component.logout('HI')
+    expect( component['_router'].navigate).toBeDefined();
+
+    component['_userDataService'] = jasmine.createSpyObj('_userDataService', ['logoutRequest'])
+    component['_userDataService'].logoutRequest = jasmine.createSpy('logoutRequest').and.returnValue(throwError(Error))
+    // spyOn(component['_userDataService'], 'fetchRSS').and.returnValue(throwError(Error))
+    component.logout('HI')
+    expect( component['_rssData']).toBeUndefined();
+  });
+
 
 });

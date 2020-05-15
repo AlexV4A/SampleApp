@@ -67,4 +67,26 @@ export class AppdataService {
 
 
   }
+
+  public logoutRequest(): Observable<RSSObject> {
+
+    const requestOptions: Object = {
+      observe: "body",
+      responseType: "text"
+    };
+    return new Observable(observer => {
+      this._http.get('https://www.espn.com/espn/rss/news', requestOptions).subscribe(res => {
+          res = this._messageAdapter.convertmesssage(res as RSSObject);
+          observer.next(res as RSSObject);
+        },
+        err => {
+          observer.error(err)
+        },
+        () => {
+          observer.complete();
+        })
+    })
+
+
+  }
 }

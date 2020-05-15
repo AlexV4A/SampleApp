@@ -2,6 +2,7 @@ import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { AppdataService } from '../shared/service/appdata.service';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { takeWhile } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workboard',
@@ -69,7 +70,7 @@ export class WorkboardComponent implements OnInit {
    */
   private _rssData : any;
 
-  constructor(private _userDataService: AppdataService) { }
+  constructor(private _userDataService: AppdataService, private _router: Router) { }
 
   /**
    *Life cycleevent ngOnInit
@@ -124,6 +125,23 @@ export class WorkboardComponent implements OnInit {
       this.dataState = 'hide';
       this.data = '';
     }, 2000);
+  }
+
+  /**
+   * Handleslogout event
+   * @param event 
+   */
+  public logout(event): void {
+    this._userDataService.logoutRequest().pipe(takeWhile(() => {
+      return this._compActive
+    })).subscribe( rss => {
+      console.log('LOGOUT ', rss)
+      this._router.navigate(['/intro']);
+    }, error=> {
+      this._rssData = undefined;
+    }
+
+    )
   }
 
   /**
